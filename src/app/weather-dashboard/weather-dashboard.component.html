@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="well">
+    <p>
+      for adding zip code validation is added as per India zip code rules.
+      (validations: 1. It can be only Six digits. 2. It should not start with
+      zero. 3. First digit of the pin code must be from 1 to 9. 4. Next Five
+      digits of the pin code may range from 0 to 9.) tested for: 431602, 431707,
+      411007
+    </p>
+  </div>
+  <add-weather-location
+    (addedZipCode)="onLocationAdd($event)"
+  ></add-weather-location>
+  <ng-container *ngFor="let zipCode of zipCodeList">
+    <weather-location-information
+      [zipCode]="zipCode"
+      (close)="onCloseInfo($event)"
+    >
+    </weather-location-information>
+  </ng-container>
+</div>

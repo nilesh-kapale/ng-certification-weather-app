@@ -1,0 +1,59 @@
+<div class="well flex" *ngIf="weatherInfo">
+  <div>
+    <h3>{{ weatherInfo.name }} ({{ zipCode }})</h3>
+    <h4>Current conditions: {{ weatherInfo.weather[0].main }}</h4>
+    <h4>Temperatures today:</h4>
+    <p>
+      Current {{ weatherInfo.main.temp }} <br />
+      - Max {{ weatherInfo.main.temp_max }} <br />
+      - Min {{ weatherInfo.main.temp_min }} <br />
+    </p>
+
+    <p>
+      <a routerLink="/forecast/{{ zipCode }}" href="javascript:void(0)"
+        >Show 5-day forecast for {{ weatherInfo.name }}</a
+      >
+    </p>
+  </div>
+  <div>
+    <span class="close" (click)="close.emit(zipCode)">×</span>
+    <ng-container [ngSwitch]="weatherInfo.weather[0].main.toLowerCase()">
+      <img
+        src="https://www.angulartraining.com/images/weather/sun.png"
+        alt="icon"
+        *ngSwitchCase="'clear'"
+      />
+      <img
+        src="https://www.angulartraining.com/images/weather/snow.png"
+        alt="icon"
+        *ngSwitchCase="'snow'"
+      />
+      <img
+        src="https://www.angulartraining.com/images/weather/rain.png"
+        alt="icon"
+        *ngSwitchCase="'rain'"
+      />
+      <img
+        src="https://www.angulartraining.com/images/weather/clouds.png"
+        alt="icon"
+        *ngSwitchCase="'clouds'"
+      />
+      <img
+        src="https://www.angulartraining.com/images/weather/sun.png"
+        alt="icon"
+        *ngSwitchDefault
+      />
+    </ng-container>
+  </div>
+</div>
+<div class="well flex" *ngIf="!weatherInfo && isError">
+  <div>
+    <h3>Information Not Available ({{ zipCode }})</h3>
+    <h4>Current conditions: -</h4>
+    <h4>Temperatures today: -</h4>
+    <p>Current - - Max - - Min -</p>
+  </div>
+  <div>
+    <span class="close" (click)="close.emit(zipCode)">×</span>
+  </div>
+</div>

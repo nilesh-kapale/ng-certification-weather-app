@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="panel panel-default" *ngIf="data">
+    <div class="panel-heading">
+      <h3 class="panel-title">5-day forecast for {{ data.city.name }}</h3>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let weatherDetails of data.list">
+        {{ weatherDetails.dt_txt | date: 'EEEE, MMMM d' }}:
+        {{ weatherDetails.weather[0].main }}
+        - Min: {{ weatherDetails.main.temp_min }} - Max:
+        {{ weatherDetails.main.temp_max }}
+
+        <ng-container [ngSwitch]="weatherDetails.weather[0].main.toLowerCase()">
+          <img
+            alt="icon"
+            class="icon"
+            src="https://www.angulartraining.com/images/weather/sun.png"
+            *ngSwitchCase="'clear'"
+          />
+          <img
+            alt="icon"
+            class="icon"
+            src="https://www.angulartraining.com/images/weather/snow.png"
+            *ngSwitchCase="'snow'"
+          />
+          <img
+            alt="icon"
+            class="icon"
+            src="https://www.angulartraining.com/images/weather/rain.png"
+            *ngSwitchCase="'rain'"
+          />
+          <img
+            alt="icon"
+            class="icon"
+            src="https://www.angulartraining.com/images/weather/clouds.png"
+            *ngSwitchCase="'clouds'"
+          />
+          <img
+            alt="icon"
+            class="icon"
+            src="https://www.angulartraining.com/images/weather/sun.png"
+            *ngSwitchDefault
+          />
+        </ng-container>
+      </li>
+    </ul>
+  </div>
+  <button
+    class="btn btn-success"
+    tabindex="0"
+    id="mainPageBtn"
+    (click)="navigateBack()"
+  >
+    &lt; Back to main page
+  </button>
+</div>
